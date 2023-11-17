@@ -36,7 +36,6 @@
     ></script>
 
     <!-- Smart JS Table -->
-    
     <script src="./js/table2excel.js"></script>
     <script src="./js/table2pdf.js"></script>
     <script src="./js/smartjstable.js"></script>
@@ -51,6 +50,12 @@
             key: "data",
             type: "text",
             name: "Test Data",
+          },
+          {
+            key: "data2",
+            type: "text",
+            name: "Test 2 Data",
+            unit: "kg"
           },
           {
             type: "template",
@@ -84,8 +89,8 @@
 
 
       var tableData = [
-        {data: "223423424"},
-        {data: "345345345"},
+        {data: "223423424", data2: 123},
+        {data: "345345345", data2: 3434},
         {data: "223423424"},
         {data: "345345345"},
         {data: "223423424"},
@@ -99,6 +104,9 @@
       ]
       
       smartjstable.show("tableBox",tableData)
+
+
+
     </script>
   </body>
 </html>

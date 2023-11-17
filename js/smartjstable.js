@@ -38,7 +38,7 @@ const smartjstable = {
             ${controlData}
             </div>
             <table id="sjt_table_${tableID}" class="table ${paramaters.css.table}">
-                <thead class="${paramaters.css.thead}">
+                <thead id="sjt_tHead_${tableID}" class="${paramaters.css.thead}">
                     <tr>
                         ${theadData}
                     </tr>
@@ -59,6 +59,8 @@ const smartjstable = {
             if (paramaters.export.pdf) {
                 document.getElementById("sjt_exportPDF_" + tableID).addEventListener("click", _sjtExportPDF)
             }
+            document.getElementById("sjt_tHead_" + tableID).addEventListener("click", _sjtTableSort)
+
             smartjstable.tableData[tableID]["created"] = true
             return true
         } else {
@@ -136,7 +138,12 @@ function _sjtShowRow(tableID, tableData) {
                                     break;
                                 case "text":
                                     if (tableData[i][columndata.key]) {
-                                        rowHtml += `<td>${tableData[i][columndata.key]}</td>`
+                                        if (columndata.unit) {
+                                            rowHtml += `<td>${tableData[i][columndata.key]} ${columndata.unit}</td>`
+                                        } else {
+                                            rowHtml += `<td>${tableData[i][columndata.key]}</td>`
+                                        }
+
                                     } else {
                                         rowHtml += `<td></td>`
                                     }
@@ -246,9 +253,10 @@ function _sjtShowPage(btn, tableID) {
 function _sjtExportExcel(input) {
     if (input.target.id.search("sjt_exportExcel") >= 0) {
         const tableID = input.target.id.split("_")[2];
-
-        var table2excel = new Table2Excel();
-        table2excel.export(document.getElementById("sjt_table_" + tableID));
+        if (smartjstable.tableData[tableID]) {
+            var table2excel = new Table2Excel();
+            table2excel.export(document.getElementById("sjt_table_" + tableID));
+        }
     }
 }
 
@@ -256,23 +264,54 @@ function _sjtExportPDF(input) {
     if (input.target.id.search("sjt_exportPDF") >= 0) {
         const tableID = input.target.id.split("_")[2];
 
-        var table = document.getElementById("sjt_table_body_" + tableID);
-        var rows = table.rows;
-        for (var i = 0; i < rows.length; i++) {
-            rows[i].classList.remove("sjt_dnone");
+        if (smartjstable.tableData[tableID]) {
+            var table = document.getElementById("sjt_table_body_" + tableID);
+            var rows = table.rows;
+            for (var i = 0; i < rows.length; i++) {
+                rows[i].classList.remove("sjt_dnone");
+            }
+
+            const tablePDF = document.getElementById("sjt_table_" + tableID);
+            html2pdf(tablePDF);
+            setTimeout(() => {
+                if (smartjstable.tableData[tableID].parameters.pagination.show) {
+                    _sjtShowPage(1, tableID)
+                }
+            }, 2000);
         }
 
-        const tablePDF = document.getElementById("sjt_table_" + tableID);
-        html2pdf(tablePDF);
-        setTimeout(() => {
-            if (smartjstable.tableData[tableID].parameters.pagination.show) {
-                _sjtShowPage(1, tableID)
-            }
-        }, 2000);
+
 
     }
 }
 
+var _sjtSortBit = false;
+function _sjtTableSort(input) {
+    const col = input.target.attributes.c.nodeValue
+    const tableID = input.target.offsetParent.id.split("_")[2]
 
+
+    if (smartjstable.tableData[tableID]) {
+        var table = document.getElementById("sjt_table_body_" + tableID);
+        var rows = table.rows;
+        for (x = 1; x < (rows.length); x++) {
+            for (i = 1; i < (rows.length - 1); i++) {
+                var comp1 = rows[i].getElementsByTagName("TD")[parseInt(col)].innerHTML.toLowerCase()
+                var comp2 = rows[i + 1].getElementsByTagName("TD")[parseInt(col)].innerHTML.toLowerCase()
+                if (comp1 < comp2 && sjt_sortBit == false) {
+                    table.rows[i].parentNode.insertBefore(rows[i + 1], table.rows[i]);
+                }
+                if (comp1 > comp2 && sjt_sortBit == true) {
+                    table.rows[i].parentNode.insertBefore(rows[i + 1], table.rows[i]);
+                }
+
+            }
+        }
+        _sjtSortBit = !_sjtSortBit
+
+    }
+
+
+}
 
 

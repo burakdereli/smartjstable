@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT"
+      crossorigin="anonymous"
+    />
+
+    <!-- Smart JS Table -->
+    <link rel="stylesheet" href="./css/smartjstable.css" />
+    <title>Smart JS Table</title>
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Smart JS Table -->
+      <div id="tableBox">
+        <!-- empty -->
+      </div>
+    </div>
+
+    
+    
+    
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+      integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- Smart JS Table -->
+    
+    <script src="./js/table2excel.js"></script>
+    <script src="./js/table2pdf.js"></script>
+    <script src="./js/smartjstable.js"></script>
+    <script>
+        smartjstable.create("tableBox",{
+        columns: [
+          {
+            type: "index",
+            name: "#",
+          },
+          {
+            key: "barkod",
+            type: "text",
+            name: "Barkod Numarası",
+          },
+          {
+            key: "durum",
+            type: "text",
+            name: "Durum",
+          },
+          {
+            key: "olcumTarih",
+            type: "dateTime",
+            name: "Ölçüm Tarihi",
+          },
+          {
+            type: "template",
+            template:
+              '<button type="button btn-sm btn-xs" class="btn btn-primary">GÖR</button>',
+            name: "İşlem",
+          },
+        ],
+        pagination: {
+            show: true,
+            perPage: 10,
+
+        },
+        export: {
+          excel: true,
+          pdf: true
+        },
+        css: {
+          table: "table-responsive",
+          thead: "bg-theme",
+          search: "form-control",
+          paginationButton: "",
+          exportButton: "btn btn-primary"
+        },
+        search: {
+          show: true,
+          placeholder: "Bul",
+          minLength: 3,
+        },
+      })
+
+
+      var tableData = [
+        {barkod: "223423424"},
+        {barkod: "345345345"},
+        {barkod: "223423424"},
+        {barkod: "345345345"},
+        {barkod: "223423424"},
+        {barkod: "345345345"},
+        {barkod: "223423424"},
+        {barkod: "345345345"},
+        {barkod: "223423424"},
+        {barkod: "345345345"},
+        {barkod: "223423424"},
+        {barkod: "345345345"},
+      ]
+      
+      var yy = new Date().getTime()
+      smartjstable.show("tableBox",tableData)
+    </script>
+  </body>
+</html>

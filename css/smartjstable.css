@@ -1,0 +1,67 @@
+.sjt_th {
+  cursor: pointer;
+}
+.sjt_control {
+  padding-top: 10px;
+  display: inline-flex;
+  margin-bottom: 10px;
+}
+.sjt_control > a,
+.sjt_control > input,
+.sjt_control > div,
+.sjt_control > button {
+  margin-right: 10px;
+}
+
+.sjt_control_footer {
+    text-align: right;
+}
+.sjt_search {
+  margin-left: 0.5rem;
+  margin-top: 0.3rem;
+  max-width: 250px;
+}
+
+.sjt_pagination {
+  margin-left: 0.5rem;
+  margin-top: 0.3rem;
+  max-width: 250px;
+}
+
+.sjt_search:invalid {
+  border-color: red;
+}
+
+.sjt_dnone {
+  display: none;
+}
+
+.sjtPaginationButton {
+  background-color: grey;
+  border: none;
+  color: black;
+  padding: 3px 10px 3px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin-right: 2px;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.sjt_exportButton {
+    background-color: orange;
+    color: black;
+    padding: 3px 10px 3px 10px;
+    margin-left: 15px;
+}
+
+.sjtPaginationButton:hover {
+  background-color: rgb(80, 79, 79);
+  color: white;
+}
+
+.sjtPaginationButtonFocus {
+    background-color: teal;
+  }

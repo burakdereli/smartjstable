@@ -48,25 +48,15 @@
             name: "#",
           },
           {
-            key: "barkod",
+            key: "data",
             type: "text",
-            name: "Barkod Numarası",
-          },
-          {
-            key: "durum",
-            type: "text",
-            name: "Durum",
-          },
-          {
-            key: "olcumTarih",
-            type: "dateTime",
-            name: "Ölçüm Tarihi",
+            name: "Test Data",
           },
           {
             type: "template",
             template:
-              '<button type="button btn-sm btn-xs" class="btn btn-primary">GÖR</button>',
-            name: "İşlem",
+              '<button type="button btn-sm btn-xs" class="btn btn-primary">Detail</button>',
+            name: "Action",
           },
         ],
         pagination: {
@@ -94,21 +84,20 @@
 
 
       var tableData = [
-        {barkod: "223423424"},
-        {barkod: "345345345"},
-        {barkod: "223423424"},
-        {barkod: "345345345"},
-        {barkod: "223423424"},
-        {barkod: "345345345"},
-        {barkod: "223423424"},
-        {barkod: "345345345"},
-        {barkod: "223423424"},
-        {barkod: "345345345"},
-        {barkod: "223423424"},
-        {barkod: "345345345"},
+        {data: "223423424"},
+        {data: "345345345"},
+        {data: "223423424"},
+        {data: "345345345"},
+        {data: "223423424"},
+        {data: "345345345"},
+        {data: "223423424"},
+        {data: "345345345"},
+        {data: "223423424"},
+        {data: "345345345"},
+        {data: "223423424"},
+        {data: "345345345"},
       ]
       
-      var yy = new Date().getTime()
       smartjstable.show("tableBox",tableData)
     </script>
   </body>
